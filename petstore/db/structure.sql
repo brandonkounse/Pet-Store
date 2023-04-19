@@ -32,7 +32,7 @@ CREATE TABLE public.ar_internal_metadata (
 CREATE TABLE public.pets (
     id bigint NOT NULL,
     name character varying,
-    type character varying,
+    pet_type character varying,
     age integer,
     created_at timestamp(6) without time zone NOT NULL,
     updated_at timestamp(6) without time zone NOT NULL
@@ -105,6 +105,8 @@ ALTER TABLE ONLY public.schema_migrations
 SET search_path TO "$user", public;
 
 INSERT INTO "schema_migrations" (version) VALUES
-('20230416234053');
+('20230416234053'),
+('20230418004338'),
+('20230419222612');
 
 
