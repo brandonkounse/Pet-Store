@@ -1,0 +1,17 @@
+<h1>List of Pets</h1>
+
+<%= link_to "Add Pet", new_pet_path %>
+
+<div>
+
+    <% @pet.each do |e| %>
+        <div>
+        <h2><%= e.name %></h2>
+        <ul>
+            <li>Species: <%= e.pet_type %></li>
+            <li>Age: <%= e.age %></li>
+        </ul>
+        </div>
+
+    <% end %>
+</div>

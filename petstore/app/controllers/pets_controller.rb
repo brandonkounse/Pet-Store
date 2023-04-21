@@ -1,5 +1,6 @@
 class PetsController < ApplicationController
   def index
+    @pet = Pet.all
   end
 
   def new
@@ -13,6 +14,16 @@ class PetsController < ApplicationController
     else
       render 'new'
     end
+  end
+
+  def show
+    @pet = Pet.find(params[:id])
+
+    render 'show'
+  end
+
+  def update
+    @pet = Pet.find(params[:id])
   end
 
   private
