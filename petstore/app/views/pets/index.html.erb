@@ -5,14 +5,16 @@
 
 <div>
 
-    <% @pet.each do |e| %>
+    <% @pet.sort.each do |e| %>
         <div>
-        <h2><%= e.name %></h2>
+        <h2>Pet #<%= e.id %></h2>
         <ul>
+            <li><%= e.name %></li>
             <li>Species: <%= e.species %></li>
             <li>Age: <%= e.age %></li>
         </ul>
         </div>
 
+        <%= link_to "Edit", edit_pet_path(e.id) %>
     <% end %>
 </div>
