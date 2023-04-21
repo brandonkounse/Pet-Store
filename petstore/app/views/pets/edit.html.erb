@@ -1,0 +1,33 @@
+<h1>Edit Pet Details</h1>
+
+<%= form_with(model: @pet, url: pet_path(@pet), method: :put) do |form| %>
+  <% if @pet.errors.any? %>
+    <div>
+      <h2><%= pluralize(@pet.errors.count, 'error') %> prohibited this pet from being saved:</h2>
+      <ul>
+      <% @pet.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+    <% end %>
+
+    <div>
+      <%= form.label :name %>
+      <%= form.text_field :name %>
+    </div>
+
+    <div>
+      <%= form.label :species %>
+      <%= form.text_field :species %>
+    </div>
+
+    <div>
+      <%= form.label :age %>
+      <%= form.text_field :age %>
+    </div>
+
+    <div>
+      <%= form.submit 'Update Pet' %>
+    </div>
+<% end %>
