@@ -1,3 +1,9 @@
-<h1><%= @pet.name %></h1>
+<h1>Pet Added!</h1>
 
-<%= link_to 'Pet Store', root_path %>
+<%= link_to 'Home', root_path %>
+
+<ul>
+    <li>Name: <%= @pet.name %></li>
+    <li>Species: <%= @pet.species %></li>
+    <li>Age: <%= @pet.age %></li>
+</ul>

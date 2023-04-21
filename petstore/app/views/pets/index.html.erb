@@ -1,5 +1,6 @@
 <h1>List of Pets</h1>
 
+<%= link_to 'Home', root_path %>
 <%= link_to "Add Pet", new_pet_path %>
 
 <div>
@@ -8,7 +9,7 @@
         <div>
         <h2><%= e.name %></h2>
         <ul>
-            <li>Species: <%= e.pet_type %></li>
+            <li>Species: <%= e.species %></li>
             <li>Age: <%= e.age %></li>
         </ul>
         </div>
