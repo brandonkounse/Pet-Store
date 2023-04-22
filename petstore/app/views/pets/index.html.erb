@@ -1,22 +1,27 @@
-<%= link_to 'Home', root_path %>
-<%= link_to "Add Pet", new_pet_path %>
+<nav>
+    <ul>
+        <li><%= link_to 'Home', root_path %></li>
+        <li><%= link_to "Add Pet", new_pet_path %></li>
+    </ul>
+</nav>
 
 <h1>List of Pets</h1>
 
-<div>
+<div class="grid-container">
     <% count = 1 %>
     <% @pet.sort.each do |e| %>
         <div>
-        <h2>Pet #<%= count %></h2>
-        <ul>
-            <li><%= e.name %></li>
-            <li>Species: <%= e.species %></li>
-            <li>Age: <%= e.age %></li>
-        </ul>
+            <h2>Pet #<%= count %></h2>
+            <ul>
+                <li>Name: <%= e.name %></li>
+                <li>Species: <%= e.species %></li>
+                <li>Age: <%= e.age %></li>
+            </ul>
+            <% count += 1 %>
+            <div class="pet-actions">
+                <%= link_to "Edit", edit_pet_path(e.id) %>
+                <%= button_to "Delete", pet_path(e.id), method: :delete, data: { turbo_confirm: "Delete #{e.name}?" } %>
+            </div>
         </div>
-        <% count += 1 %>
-
-        <%= link_to "Edit", edit_pet_path(e.id) %>
-        <%= button_to "Delete", pet_path(e.id), method: :delete, data: { turbo_confirm: "Delete #{e.name}?" } %>
     <% end %>
 </div>
