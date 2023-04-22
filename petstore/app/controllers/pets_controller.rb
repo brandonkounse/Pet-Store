@@ -31,14 +31,14 @@ class PetsController < ApplicationController
     if @pet.update(pet_params)
       redirect_to @pet
     else
-      render 'index'
+      redirect_to edit_pet_url, notice: 'Age must be an integer only!'
     end
   end
 
   def destroy
     @pet = Pet.find(params[:id])
     @pet.destroy
-    redirect_to pets_path, notice: "#{@pet} deleted successfully."
+    redirect_to pets_path, notice: "#{@pet.name} deleted successfully."
   end
 
   private
