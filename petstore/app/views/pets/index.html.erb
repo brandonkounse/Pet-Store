@@ -5,6 +5,10 @@
     </ul>
 </nav>
 
+<% if flash[:notice] %>
+    <div><%= flash[:notice] %></div>
+<% end %>
+
 <h1>List of Pets</h1>
 
 <div class="grid-container">

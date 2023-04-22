@@ -1,5 +1,9 @@
 <h1>Edit Pet Details</h1>
 
+<% if flash[:notice] %>
+    <div><%= flash[:notice] %></div><br>
+<% end %>
+
 <%= form_with(model: @pet, url: pet_path(@pet), method: :put) do |form| %>
   <% if @pet.errors.any? %>
     <div>
