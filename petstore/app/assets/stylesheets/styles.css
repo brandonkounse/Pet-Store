@@ -1,0 +1,24 @@
+body {
+    margin: 0.5em 2em;
+}
+
+ul {
+    padding: 0;
+    list-style-type: none;
+}
+
+nav > ul {
+    display: flex;
+    gap: 1em;
+}
+
+.grid-container {
+    display: grid;
+    grid-auto-flow: row;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+}
+
+.pet-actions {
+    display: flex;
+    gap: 0.5em;
+}
