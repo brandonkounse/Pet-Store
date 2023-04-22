@@ -16,5 +16,6 @@
         </div>
 
         <%= link_to "Edit", edit_pet_path(e.id) %>
+        <%= button_to "Delete", pet_path(e.id), method: :delete, data: { turbo_confirm: "Delete #{e.name}?" } %>
     <% end %>
 </div>
