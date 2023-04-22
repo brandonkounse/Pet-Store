@@ -68,10 +68,50 @@ CREATE TABLE public.schema_migrations (
 
 
 --
+-- Name: stores; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.stores (
+    id bigint NOT NULL,
+    pet_id bigint NOT NULL,
+    order_date timestamp(6) without time zone NOT NULL,
+    total_cost numeric(10,2) NOT NULL,
+    created_at timestamp(6) without time zone NOT NULL,
+    updated_at timestamp(6) without time zone NOT NULL
+);
+
+
+--
+-- Name: stores_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE public.stores_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: stores_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE public.stores_id_seq OWNED BY public.stores.id;
+
+
+--
 -- Name: pets id; Type: DEFAULT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY public.pets ALTER COLUMN id SET DEFAULT nextval('public.pets_id_seq'::regclass);
+
+
+--
+-- Name: stores id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.stores ALTER COLUMN id SET DEFAULT nextval('public.stores_id_seq'::regclass);
 
 
 --
@@ -99,6 +139,29 @@ ALTER TABLE ONLY public.schema_migrations
 
 
 --
+-- Name: stores stores_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.stores
+    ADD CONSTRAINT stores_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: index_stores_on_pet_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_stores_on_pet_id ON public.stores USING btree (pet_id);
+
+
+--
+-- Name: stores fk_rails_a22a219447; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.stores
+    ADD CONSTRAINT fk_rails_a22a219447 FOREIGN KEY (pet_id) REFERENCES public.pets(id);
+
+
+--
 -- PostgreSQL database dump complete
 --
 
@@ -108,6 +171,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20230416234053'),
 ('20230418004338'),
 ('20230419222612'),
-('20230421012152');
+('20230421012152'),
+('20230422174445');
 
 
