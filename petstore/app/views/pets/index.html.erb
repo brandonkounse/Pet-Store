@@ -4,16 +4,17 @@
 <%= link_to "Add Pet", new_pet_path %>
 
 <div>
-
+    <% count = 1 %>
     <% @pet.sort.each do |e| %>
         <div>
-        <h2>Pet #<%= e.id %></h2>
+        <h2>Pet #<%= count %></h2>
         <ul>
             <li><%= e.name %></li>
             <li>Species: <%= e.species %></li>
             <li>Age: <%= e.age %></li>
         </ul>
         </div>
+        <% count += 1 %>
 
         <%= link_to "Edit", edit_pet_path(e.id) %>
         <%= button_to "Delete", pet_path(e.id), method: :delete, data: { turbo_confirm: "Delete #{e.name}?" } %>
