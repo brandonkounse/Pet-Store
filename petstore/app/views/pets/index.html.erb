@@ -1,31 +1,26 @@
-<nav>
-    <ul>
-        <li><%= link_to 'Home', root_path %></li>
-        <li><%= link_to "Add Pet", new_pet_path %></li>
-    </ul>
-</nav>
-
 <% if flash[:notice] %>
     <div><%= flash[:notice] %></div>
 <% end %>
 
 <h1>List of Pets</h1>
 
-<div class="grid-container">
+<%= link_to "Add Pet", new_pet_path %><br><br>
+
+<div>
     <% count = 1 %>
-    <% @pet.sort.each do |e| %>
-        <div>
-            <h2>Pet #<%= count %></h2>
-            <ul>
-                <li>Name: <%= e.name %></li>
-                <li>Species: <%= e.species %></li>
-                <li>Age: <%= e.age %></li>
-            </ul>
-            <% count += 1 %>
-            <div class="pet-actions">
-                <%= link_to "Edit", edit_pet_path(e.id) %>
-                <%= button_to "Delete", pet_path(e.id), method: :delete, data: { turbo_confirm: "Delete #{e.name}?" } %>
-            </div>
-        </div>
-    <% end %>
+    <table>
+        <th>Name</th>
+        <th>Species</th>
+        <th>Age</th>
+            <% @pet.sort.each do |e| %>
+                <tr>
+                    <td><%= e.name %></td>
+                    <td><%= e.species %></td>
+                    <td><%= e.age %></td>
+                    <td><%= link_to "Edit", edit_pet_path(e.id) %></td>
+                    <td><%= button_to "Delete", pet_path(e.id), method: :delete, data: { turbo_confirm: "Delete #{e.name}?" } %></td>
+                </tr>
+                <% count += 1 %>
+            <% end %>
+    </table>
 </div>
