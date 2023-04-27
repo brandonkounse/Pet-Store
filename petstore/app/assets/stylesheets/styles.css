@@ -12,14 +12,15 @@ nav > ul {
     gap: 1em;
 }
 
-.grid-container {
-    display: grid;
-    grid-auto-flow: row;
-    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+
+table, th, tr, td {
+    border: solid 1px black;
+    border-collapse: collapse;
+    padding: 0 0.5em 0 0.5em;
+    text-align: left;
 }
 
-.pet-actions {
-    display: flex;
-    gap: 0.5em;
-    align-items: center;
+th, td {
+    width: 5em;
+    height: 2em;
 }
