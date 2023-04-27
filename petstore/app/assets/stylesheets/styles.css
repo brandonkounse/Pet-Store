@@ -24,3 +24,8 @@ th, td {
     width: 5em;
     height: 2em;
 }
+
+.flex {
+    display: flex;
+    gap: 1em;
+}
