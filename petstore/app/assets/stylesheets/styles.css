@@ -27,5 +27,10 @@ th, td {
 
 .flex {
     display: flex;
+    align-items: center;
     gap: 1em;
+}
+
+.flash-margin {
+    margin-bottom: 1em;
 }
