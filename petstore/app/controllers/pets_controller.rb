@@ -35,6 +35,21 @@ class PetsController < ApplicationController
     end
   end
 
+  def search
+    @search_query = params[:search]
+    if @search_query.is_a? Numeric
+      @pet = Pet.where('id = ?', @search_query)
+    else
+      @pet = Pet.where('name ILIKE ?', "%#{@search_query}")
+    end
+
+    if @pet.empty?
+      flash.now[:notice] = 'No pets found'
+    elsif @pet.count == 1
+      redirect_to pet_path(@pet.first)
+    end
+  end
+
   def destroy
     @pet = Pet.find(params[:id])
     @pet.destroy
