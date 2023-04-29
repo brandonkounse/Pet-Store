@@ -4,16 +4,20 @@
 
 <h1>List of Pets</h1>
 
-<%= link_to "Add Pet", new_pet_path %><br><br>
+<ul class="flex">
+    <li><%= link_to "Add Pet", new_pet_path %></li>
+</ul>
 
 <div>
     <% count = 1 %>
     <table>
+        <th>ID</th>
         <th>Name</th>
         <th>Species</th>
         <th>Age</th>
             <% @pet.sort.each do |e| %>
                 <tr>
+                    <td><%= e.id %></td>
                     <td><%= e.name %></td>
                     <td><%= e.species %></td>
                     <td><%= e.age %></td>
