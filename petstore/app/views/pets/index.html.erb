@@ -6,25 +6,13 @@
 
 <ul class="flex">
     <li><%= link_to "Add Pet", new_pet_path %></li>
+    <li>
+        <%= form_with url: '/search', method: :get do |form| %>
+            <%= form.label :search, 'Search for pet' %>
+            <%= form.text_field :search %>
+            <%= form.submit 'Search' %>
+        <% end %>
+    </li>
 </ul>
 
-<div>
-    <% count = 1 %>
-    <table>
-        <th>ID</th>
-        <th>Name</th>
-        <th>Species</th>
-        <th>Age</th>
-            <% @pet.sort.each do |e| %>
-                <tr>
-                    <td><%= e.id %></td>
-                    <td><%= e.name %></td>
-                    <td><%= e.species %></td>
-                    <td><%= e.age %></td>
-                    <td><%= link_to "Edit", edit_pet_path(e.id) %></td>
-                    <td><%= button_to "Delete", pet_path(e.id), method: :delete, data: { turbo_confirm: "Delete #{e.name}?" } %></td>
-                </tr>
-                <% count += 1 %>
-            <% end %>
-    </table>
-</div>
+<div><%= render 'pet_table' %></div>
