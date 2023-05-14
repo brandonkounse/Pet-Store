@@ -31,7 +31,7 @@ class PetsController < ApplicationController
     if @pet.update(pet_params)
       redirect_to @pet
     else
-      redirect_to edit_pet_url, notice: 'Age must be an integer only!'
+      redirect_to edit_pet_url, alert: @pet.errors.full_messages.join(', ')
     end
   end
 
