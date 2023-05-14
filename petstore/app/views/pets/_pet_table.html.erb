@@ -4,14 +4,14 @@
     <th>Name</th>
     <th>Species</th>
     <th>Age</th>
-        <% @pet.sort.each do |e| %>
+        <% @pet.sort.each do |pet| %>
             <tr>
-                <td><%= e.id %></td>
-                <td><%= e.name %></td>
-                <td><%= e.species %></td>
-                <td><%= e.age %></td>
-                <td><%= link_to "Edit", edit_pet_path(e.id) %></td>
-                <td><%= button_to "Delete", pet_path(e.id), method: :delete, data: { turbo_confirm: "Delete #{e.name}?" } %></td>
+                <td><%= pet.id %></td>
+                <td><%= pet.name %></td>
+                <td><%= pet.species %></td>
+                <td><%= pet.age %></td>
+                <td><%= link_to "Edit", edit_pet_path(pet.id) %></td>
+                <td><%= button_to "Delete", pet_path(pet.id), method: :delete, data: { turbo_confirm: "Delete #{pet.name}?" } %></td>
             </tr>
             <% count += 1 %>
         <% end %>
