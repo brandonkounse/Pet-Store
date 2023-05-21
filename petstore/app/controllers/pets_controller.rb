@@ -17,7 +17,9 @@ class PetsController < ApplicationController
   end
 
   def show
-    @pet = Pet.find(params[:id])
+    @pet = Rails.cache.fetch("pet#{params[:id]}", expires_in: 30.minutes) do
+      Pet.find(params[:id])
+    end
 
     render 'show'
   end
