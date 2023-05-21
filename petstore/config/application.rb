@@ -20,5 +20,11 @@ module Petstore
     #
     # config.time_zone = "Central Time (US & Canada)"
     # config.eager_load_paths << Rails.root.join("extras")
+
+    # Define REDIS URL
+    ENV['REDIS_URL'] = 'redis://localhost:6379/0'
+
+    # Custom cache store configuration
+    config.cache_store = :redis_cache_store, { url: ENV['REDIS_URL'] }
   end
 end
