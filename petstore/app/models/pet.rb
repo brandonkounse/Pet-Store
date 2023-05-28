@@ -1,7 +1,7 @@
 class Pet < ApplicationRecord
   validates :age, numericality: { only_integer: true }
 
-  after_update_commit :clear_cache
+  after_commit :clear_cache, :on => [:create, :update, :destroy]
 
   private
 
