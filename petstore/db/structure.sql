@@ -35,7 +35,8 @@ CREATE TABLE public.pets (
     species character varying,
     age integer,
     created_at timestamp(6) without time zone NOT NULL,
-    updated_at timestamp(6) without time zone NOT NULL
+    updated_at timestamp(6) without time zone NOT NULL,
+    price numeric(5,2)
 );
 
 
@@ -172,6 +173,8 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20230418004338'),
 ('20230419222612'),
 ('20230421012152'),
-('20230422174445');
+('20230422174445'),
+('20230528133553'),
+('20230528135904');
 
 
