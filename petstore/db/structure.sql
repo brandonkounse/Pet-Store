@@ -74,11 +74,12 @@ CREATE TABLE public.schema_migrations (
 
 CREATE TABLE public.stores (
     id bigint NOT NULL,
-    pet_id bigint NOT NULL,
+    order_number bigint NOT NULL,
     order_date timestamp(6) without time zone NOT NULL,
     total_cost numeric(10,2) NOT NULL,
     created_at timestamp(6) without time zone NOT NULL,
-    updated_at timestamp(6) without time zone NOT NULL
+    updated_at timestamp(6) without time zone NOT NULL,
+    order_details bigint[] DEFAULT '{}'::bigint[]
 );
 
 
@@ -148,10 +149,10 @@ ALTER TABLE ONLY public.stores
 
 
 --
--- Name: index_stores_on_pet_id; Type: INDEX; Schema: public; Owner: -
+-- Name: index_stores_on_order_number; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE INDEX index_stores_on_pet_id ON public.stores USING btree (pet_id);
+CREATE INDEX index_stores_on_order_number ON public.stores USING btree (order_number);
 
 
 --
@@ -159,7 +160,7 @@ CREATE INDEX index_stores_on_pet_id ON public.stores USING btree (pet_id);
 --
 
 ALTER TABLE ONLY public.stores
-    ADD CONSTRAINT fk_rails_a22a219447 FOREIGN KEY (pet_id) REFERENCES public.pets(id);
+    ADD CONSTRAINT fk_rails_a22a219447 FOREIGN KEY (order_number) REFERENCES public.pets(id);
 
 
 --
@@ -175,6 +176,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20230421012152'),
 ('20230422174445'),
 ('20230528133553'),
-('20230528135904');
+('20230528135904'),
+('20230529195634');
 
 
