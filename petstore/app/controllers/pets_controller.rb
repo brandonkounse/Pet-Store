@@ -12,7 +12,7 @@ class PetsController < ApplicationController
     if @pet.save
       redirect_to @pet
     else
-      render 'new'
+      render :new, status: :unprocessable_entity
     end
   end
 
@@ -21,7 +21,7 @@ class PetsController < ApplicationController
       Pet.find(params[:id])
     end
 
-    render 'show'
+    render :show
   end
 
   def edit
@@ -33,7 +33,7 @@ class PetsController < ApplicationController
     if @pet.update(pet_params)
       redirect_to @pet
     else
-      redirect_to edit_pet_url, alert: @pet.errors.full_messages.join(', ')
+      render :edit, status: :unprocessable_entity
     end
   end
 
