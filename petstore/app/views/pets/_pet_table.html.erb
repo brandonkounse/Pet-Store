@@ -4,12 +4,14 @@
     <th>Name</th>
     <th>Species</th>
     <th>Age</th>
+    <th>Price</th>
         <% @pet.sort.each do |pet| %>
             <tr>
                 <td><%= pet.id %></td>
                 <td><%= pet.name %></td>
                 <td><%= pet.species %></td>
                 <td><%= pet.age %></td>
+                <td>$<%= pet.price %></td>
                 <td><%= link_to "Edit", edit_pet_path(pet.id) %></td>
                 <td><%= button_to "Delete", pet_path(pet.id), method: :delete, data: { turbo_confirm: "Delete #{pet.name}?" } %></td>
             </tr>
