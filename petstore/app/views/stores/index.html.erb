@@ -1,0 +1,10 @@
+<h1 id="store-front-header">Pets For You</h1>
+
+<ul class="grid-container">
+    <% @pet.each do |pet| %>
+    <div class="box">
+        <li><%= pet.name %></li>
+        <li><%= pet.species %></li>
+    </div>
+    <% end %>
+</ul>
