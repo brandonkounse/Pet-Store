@@ -7,11 +7,6 @@ ul {
     list-style-type: none;
 }
 
-nav > ul {
-    display: flex;
-    gap: 1em;
-}
-
 
 table, th, tr, td {
     border: solid 1px black;
@@ -33,4 +28,25 @@ th, td {
 
 .flash-margin {
     margin-bottom: 1em;
+}
+
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(4, auto);
+    justify-content: center;
+}
+
+.box {
+    height: 250px;
+    width: 250px;
+    border: solid 1px black;
+    border-collapse: collapse;
+    box-sizing: border-box;
+    /* Below prevents 'double' borders between grid items */
+    margin-top: -1px;
+    margin-left: -1px;
+}
+
+#store-front-header {
+    text-align: center;
 }
