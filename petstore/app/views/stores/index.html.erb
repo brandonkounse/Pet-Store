@@ -10,10 +10,12 @@
     <% @pet.each do |pet| %>
     <div class="box">
         <div class="pet-box">
-            <li class="pet-image-container"><%= image_tag("#{pet.species.downcase}.jpg", alt: 'Pet Image', class: 'pet-image') %></li>
+            <% pet_img = "#{pet.species.downcase}.jpg" %>
+            <% pet_img = 'nil' unless File.exist?(Rails.root.join('app', 'assets', 'images', "#{pet_img}")) %>
+            <li class="pet-image-container"><%= image_tag(pet_img, alt: 'Pet Image', class: 'pet-image') %></li>
             <div class="pet-details">
                 <li><%= pet.name %></li>
-                <li><%= pet.species %></li>
+                <li>Age: <%= pet.age %></li>
             </div>
         </div>
     </div>
