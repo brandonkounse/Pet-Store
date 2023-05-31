@@ -34,12 +34,7 @@ th, td {
     display: grid;
     grid-template-columns: repeat(4, auto);
     justify-content: center;
-}
-
-.box {
-    height: 250px;
-    width: 250px;
-    box-sizing: border-box;
+    gap: 1em;
 }
 
 #store-front-header {
@@ -49,6 +44,12 @@ th, td {
 #store-nav {
     display: flex;
     justify-content: end;
+}
+
+.box {
+    height: 250px;
+    width: 250px;
+    box-sizing: border-box;
 }
 
 .pet-box {
