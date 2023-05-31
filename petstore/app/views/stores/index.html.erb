@@ -1,10 +1,21 @@
+<nav>
+    <ul id="store-nav">    
+        <li><%= link_to 'Employee Portal', pets_path%></li>
+    </ul>
+</nav>
+
 <h1 id="store-front-header">Pets For You</h1>
 
 <ul class="grid-container">
     <% @pet.each do |pet| %>
     <div class="box">
-        <li><%= pet.name %></li>
-        <li><%= pet.species %></li>
+        <div class="pet-box">
+            <li class="pet-image-container"><%= image_tag("#{pet.species.downcase}.jpg", alt: 'Pet Image', class: 'pet-image') %></li>
+            <div class="pet-details">
+                <li><%= pet.name %></li>
+                <li><%= pet.species %></li>
+            </div>
+        </div>
     </div>
     <% end %>
 </ul>
