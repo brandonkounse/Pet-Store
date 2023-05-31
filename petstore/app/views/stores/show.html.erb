@@ -1,7 +1,9 @@
 <h1>Pet Information</h1>
 
-<% @pet.each do |pet| %>
-    <ul>
-        <li><%= %>
-    </ul>
-<% end %>
+<ul>
+  <li class="box"><%= image_tag(pet_image_path(@pet), alt: 'Pet Image', class: 'pet-image') %></li>
+  <li><%= @pet.name %></li>
+  <li><%= @pet.age %></li>
+  <li><%= @pet.species %></li>
+  <li>$<%= @pet.price %></li>
+</ul>
