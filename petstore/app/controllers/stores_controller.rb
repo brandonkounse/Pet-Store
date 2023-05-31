@@ -3,7 +3,11 @@ class StoresController < ApplicationController
     @pet = Pet.all
   end
 
-  def show
-    @pet = Pet.find(params[:id])
+  def order
+    @pet = Rails.cache.fetch("pet#{params[:id]}", expires_in: 30.minutes) do
+      Pet.find(params[:id])
+    end
+
+    render :order
   end
 end

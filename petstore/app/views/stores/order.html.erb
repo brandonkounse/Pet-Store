@@ -1,0 +1,13 @@
+<%= link_to 'View All Pets', stores_path %>
+
+<h1>Pet Information</h1>
+
+<ul>
+  <li class="box"><%= image_tag(pet_image_path(@pet), alt: 'Pet Image', class: 'pet-image') %></li><br />
+  <li>Name: <%= @pet.name %></li>
+  <li>Age: <%= @pet.age %></li>
+  <li>Species: <%= @pet.species %></li>
+  <li>$<%= @pet.price %></li>
+</ul>
+
+<%= button_to 'Order', order_store_path, method: :get %>
