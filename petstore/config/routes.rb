@@ -4,5 +4,5 @@ Rails.application.routes.draw do
   resources :pets
   resources :stores, path: 'store'
 
-  root 'pets#index'
+  root 'stores#index'
 end
