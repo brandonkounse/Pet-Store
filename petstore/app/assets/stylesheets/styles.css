@@ -2,11 +2,6 @@ body {
     margin: 0.5em 2em;
 }
 
-a {
-    text-decoration: none;
-    color: black;
-}
-
 ul {
     padding: 0;
     list-style-type: none;
@@ -39,6 +34,11 @@ th, td {
     grid-template-columns: repeat(4, auto);
     justify-content: center;
     gap: 1em;
+}
+
+.grid-container > a {
+    text-decoration: none;
+    color: black;
 }
 
 #store-front-header {
