@@ -22,3 +22,15 @@ Things you may want to cover:
 * Deployment instructions
 
 * ...
+
+All pet images are from http://www.pexels.com and are accredited to these photographers:
+-Animal: Dog,        Photographer: Dominika Roseclay
+-Animal: Cat,        Photographer: Dominika Roseclay
+-Animal: Ferret,     Photographer: Verina
+-Animal: Monkey,     Photographer: DSD
+-Animal: Parrot,     Photographer: Oleksandr Pidvalnyi
+-Animal: Guinea Pig, Photographer: Jakson Martins
+-Animal: Lizard,     Photographer: Sameera Madusanka
+-Animal: Gerbil,     Photographer: Robbie Owenwahl
+-Animal: Rabbit,     Photographer: Lil Artsy
+-Animal: Hamster,    Photographer: Faris Subriun
