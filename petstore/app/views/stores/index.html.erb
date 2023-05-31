@@ -7,19 +7,17 @@
 <h1 id="store-front-header">Pets For You</h1>
 
 <div class="grid-container">
-    <% @pet.each do |pet| %>
-        <%= link_to store_path(pet.id) do %>
-            <div class="box">
-                <div class="pet-box">
-                    <% pet_img = "#{pet.species.downcase}.jpg" %>
-                    <% pet_img = 'nil' unless File.exist?(Rails.root.join('app', 'assets', 'images', "#{pet_img}")) %>
-                    <div class="pet-image-container"><%= image_tag(pet_img, alt: 'Pet Image', class: 'pet-image') %></div>
-                    <div class="pet-details">
-                        <div><%= pet.name %></div>
-                        <div>Age: <%= pet.age %></div>
-                    </div>
-                </div>
+  <% @pet.each do |pet| %>
+    <%= link_to store_path(pet.id) do %>
+      <div class="box">
+        <div class="pet-box">
+          <div class="pet-image-container"><%= image_tag(pet_image_path(pet), alt: 'Pet Image', class: 'pet-image') %></div>
+            <div class="pet-details">
+              <div><%= pet.name %></div>
+              <div>Age: <%= pet.age %></div>
             </div>
-        <% end %>
+        </div>
+      </div>
     <% end %>
+  <% end %>
 </div>

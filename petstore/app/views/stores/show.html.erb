@@ -1,1 +1,7 @@
-<%= @pet %>
+<h1>Pet Information</h1>
+
+<% @pet.each do |pet| %>
+    <ul>
+        <li><%= %>
+    </ul>
+<% end %>

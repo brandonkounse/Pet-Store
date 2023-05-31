@@ -1,4 +1,6 @@
 class PetsController < ApplicationController
+  include PetsHelper
+
   def index
     @pet = Pet.all
   end
