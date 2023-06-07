@@ -79,7 +79,8 @@ CREATE TABLE public.stores (
     total_cost numeric(10,2) NOT NULL,
     created_at timestamp(6) without time zone NOT NULL,
     updated_at timestamp(6) without time zone NOT NULL,
-    order_details bigint[] DEFAULT '{}'::bigint[]
+    order_details bigint[] DEFAULT '{}'::bigint[],
+    user_email character varying
 );
 
 
@@ -177,6 +178,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20230422174445'),
 ('20230528133553'),
 ('20230528135904'),
-('20230529195634');
+('20230529195634'),
+('20230607135807');
 
 
