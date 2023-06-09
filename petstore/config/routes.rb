@@ -1,10 +1,9 @@
 Rails.application.routes.draw do
+  root 'stores#index'
+
   get 'search', to: 'pets#search'
 
   resources :pets
-  resources :stores, path: 'store' do
-    get 'order', on: :member
-  end
+  resources :stores, path: 'store'
 
-  root 'stores#index'
 end
