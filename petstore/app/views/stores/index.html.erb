@@ -1,7 +1,7 @@
 <h1 id="store-front-header">Pets For You</h1>
 
 <div class="grid-container">
-  <% @pet.each do |pet| %>
+  <% @pet.sort.each do |pet| %>
     <%= link_to store_path(pet.id) do %>
       <div class="box">
         <div class="pet-box">
