@@ -26,6 +26,41 @@ CREATE TABLE public.ar_internal_metadata (
 
 
 --
+-- Name: orders; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.orders (
+    id bigint NOT NULL,
+    order_number character varying,
+    order_date date,
+    total_cost numeric,
+    order_details text,
+    user_email character varying,
+    created_at timestamp(6) without time zone NOT NULL,
+    updated_at timestamp(6) without time zone NOT NULL
+);
+
+
+--
+-- Name: orders_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE public.orders_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: orders_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE public.orders_id_seq OWNED BY public.orders.id;
+
+
+--
 -- Name: pets; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -69,38 +104,10 @@ CREATE TABLE public.schema_migrations (
 
 
 --
--- Name: stores; Type: TABLE; Schema: public; Owner: -
+-- Name: orders id; Type: DEFAULT; Schema: public; Owner: -
 --
 
-CREATE TABLE public.stores (
-    id bigint NOT NULL,
-    order_number bigint NOT NULL,
-    order_date timestamp(6) without time zone NOT NULL,
-    total_cost numeric(10,2) NOT NULL,
-    created_at timestamp(6) without time zone NOT NULL,
-    updated_at timestamp(6) without time zone NOT NULL,
-    order_details bigint[] DEFAULT '{}'::bigint[],
-    user_email character varying
-);
-
-
---
--- Name: stores_id_seq; Type: SEQUENCE; Schema: public; Owner: -
---
-
-CREATE SEQUENCE public.stores_id_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
---
--- Name: stores_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
---
-
-ALTER SEQUENCE public.stores_id_seq OWNED BY public.stores.id;
+ALTER TABLE ONLY public.orders ALTER COLUMN id SET DEFAULT nextval('public.orders_id_seq'::regclass);
 
 
 --
@@ -111,18 +118,19 @@ ALTER TABLE ONLY public.pets ALTER COLUMN id SET DEFAULT nextval('public.pets_id
 
 
 --
--- Name: stores id; Type: DEFAULT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY public.stores ALTER COLUMN id SET DEFAULT nextval('public.stores_id_seq'::regclass);
-
-
---
 -- Name: ar_internal_metadata ar_internal_metadata_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY public.ar_internal_metadata
     ADD CONSTRAINT ar_internal_metadata_pkey PRIMARY KEY (key);
+
+
+--
+-- Name: orders orders_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.orders
+    ADD CONSTRAINT orders_pkey PRIMARY KEY (id);
 
 
 --
@@ -142,29 +150,6 @@ ALTER TABLE ONLY public.schema_migrations
 
 
 --
--- Name: stores stores_pkey; Type: CONSTRAINT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY public.stores
-    ADD CONSTRAINT stores_pkey PRIMARY KEY (id);
-
-
---
--- Name: index_stores_on_order_number; Type: INDEX; Schema: public; Owner: -
---
-
-CREATE INDEX index_stores_on_order_number ON public.stores USING btree (order_number);
-
-
---
--- Name: stores fk_rails_a22a219447; Type: FK CONSTRAINT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY public.stores
-    ADD CONSTRAINT fk_rails_a22a219447 FOREIGN KEY (order_number) REFERENCES public.pets(id);
-
-
---
 -- PostgreSQL database dump complete
 --
 
@@ -179,6 +164,8 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20230528133553'),
 ('20230528135904'),
 ('20230529195634'),
-('20230607135807');
+('20230607135807'),
+('20230611232335'),
+('20230611232950');
 
 
