@@ -1,6 +1,6 @@
 class Order < ApplicationRecord
   before_create :generate_order_number, :set_order_date
-  after_commit :delete_pet
+  after_commit :mark_as_sold
 
   private
 
@@ -15,8 +15,9 @@ class Order < ApplicationRecord
     self.order_date = Time.zone.now
   end
 
-  def delete_pet
+  def mark_as_sold
     pet_id = JSON.parse(order_details)["id"]
-    Pet.find_by(id: pet_id)&.destroy
+    pet = Pet.find_by(id: pet_id)
+    pet.update(sold: true)
   end
 end
