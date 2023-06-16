@@ -71,7 +71,8 @@ CREATE TABLE public.pets (
     age integer,
     created_at timestamp(6) without time zone NOT NULL,
     updated_at timestamp(6) without time zone NOT NULL,
-    price numeric(5,2)
+    price numeric(5,2),
+    sold boolean DEFAULT false
 );
 
 
@@ -166,6 +167,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20230529195634'),
 ('20230607135807'),
 ('20230611232335'),
-('20230611232950');
+('20230611232950'),
+('20230616214130');
 
 
