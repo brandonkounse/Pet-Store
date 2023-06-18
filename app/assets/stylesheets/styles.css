@@ -84,8 +84,8 @@ th, td {
 }
 
 .pet-image:hover {
-    border: solid 2px black;
-    box-shadow: 1px 1px 4px black;
+    border: solid 1px rgb(45, 45, 45);
+    box-shadow: 1px 1px 4px gray;
 }
 
 .pet-details {
