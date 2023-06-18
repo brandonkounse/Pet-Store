@@ -63,6 +63,10 @@ th, td {
     flex-direction: column;
 }
 
+.pet-box:hover .pet-details div {
+    font-weight: bold;
+}
+
 .pet-image-container {
     width: 100%;
     height: 66.67%;
@@ -72,6 +76,10 @@ th, td {
     object-fit: cover;
     width: 100%;
     height: 100%;
+}
+
+.pet-image:hover {
+    border: solid 1px black;
 }
 
 .pet-details {
