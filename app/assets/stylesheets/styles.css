@@ -3,11 +3,16 @@
 }
 body {
     margin: 0.5em 2em;
+    font-family: 'Roboto', sans-serif;
 }
 
 ul {
     padding: 0;
     list-style-type: none;
+}
+
+img {
+    border-radius: 1em;
 }
 
 table, th, tr, td {
@@ -79,7 +84,8 @@ th, td {
 }
 
 .pet-image:hover {
-    border: solid 1px black;
+    border: solid 2px black;
+    box-shadow: 1px 1px 4px black;
 }
 
 .pet-details {
