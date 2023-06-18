@@ -1,4 +1,6 @@
 class Order < ApplicationRecord
+  validates :user_email, email: true, presence: true
+
   before_create :generate_order_number, :set_order_date
   after_commit :mark_as_sold
 
