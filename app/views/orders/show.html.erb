@@ -1,1 +1,9 @@
-<h1>Order Successful</h1>
+<h1>Order Details</h1>
+
+<ul>
+    <li>Pet: <%= JSON.parse(@order.order_details)["name"] %></li>
+    <li>Total: $<%= @order.total_cost %></li>
+    <li>Order Number: <%= @order.order_number %></li>
+    <li>Order Date: <%= @order.order_date %></li>
+    <li>User Info: <%= @order.user_email %></li>
+</ul>
