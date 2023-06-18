@@ -1,4 +1,15 @@
-<h1>Store Order Page</h1>
+<h1>Order Pet</h1>
+
+<% if @order.errors.any? %>
+  <div>
+    <h2><%= pluralize(@order.errors.count, 'error') %> prohibited this pet from being saved:</h2>
+    <ul>
+    <% @order.errors.full_messages.each do |message| %>
+      <li><%= message %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
 
 <div>
   <h2>Pet Info</h2>
