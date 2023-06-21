@@ -7,3 +7,5 @@
     <li>Order Date: <%= @order.order_date %></li>
     <li>User Info: <%= @order.user_email %></li>
 </ul>
+
+<%= button_to "Cancel Order", order_path(@order.id), method: :delete, data: { turbo_confirm: "Cancel order for #{@pet.name}?" } %>
