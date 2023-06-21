@@ -1,5 +1,9 @@
 <h1 id="store-front-header">Pets For You</h1>
 
+<% if flash[:notice] %>
+    <div><%= flash[:notice] %></div><br /><br />
+<% end %>
+
 <div class="grid-container">
   <% @pet.sort.each do |pet| %>
     <% next if pet.sold == true %>
