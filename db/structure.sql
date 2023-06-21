@@ -31,7 +31,7 @@ CREATE TABLE public.ar_internal_metadata (
 
 CREATE TABLE public.orders (
     id bigint NOT NULL,
-    order_number character varying,
+    order_confirmation_number character varying,
     order_date date,
     total_cost numeric,
     order_details text,
@@ -168,6 +168,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20230607135807'),
 ('20230611232335'),
 ('20230611232950'),
-('20230616214130');
+('20230616214130'),
+('20230621161408');
 
 
