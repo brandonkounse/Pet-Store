@@ -9,7 +9,7 @@ class Order < ApplicationRecord
   def generate_order_number
     loop do
       self.order_number = SecureRandom.alphanumeric(10).upcase
-      break unless Order.exists?(order_number: order_number)
+      break unless Order.exists?(order_confirmation_number: order_number)
     end
   end
 
