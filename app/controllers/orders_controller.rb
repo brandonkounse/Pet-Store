@@ -1,4 +1,6 @@
 class OrdersController < ApplicationController
+  include OrdersHelper
+
   def new
     session[:pet] = params[:id]
     @pet = Pet.find(session[:pet])
@@ -18,7 +20,7 @@ class OrdersController < ApplicationController
 
   def show
     @pet = Pet.find(session[:pet])
-    @order = Order.find(params[:id])
+    @order = cached_order_data
   end
 
   def destroy
