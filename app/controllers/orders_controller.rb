@@ -17,12 +17,15 @@ class OrdersController < ApplicationController
   end
 
   def show
+    @pet = Pet.find(session[:pet])
     @order = Order.find(params[:id])
   end
 
   def destroy
+    @pet = Pet.find(session[:pet])
     @order = Order.find(params[:id])
     @order.destroy
+    redirect_to stores_path, notice: "Order for #{@pet.name} cancelled successfully!"
   end
 
   def sold
