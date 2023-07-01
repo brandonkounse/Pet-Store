@@ -23,7 +23,7 @@ RSpec.describe Pet, type: :model do
   end
 
   context :species do
-    it 'valides the presence of species' do
+    it 'validates the presence of species' do
       pet = Pet.new
       expect(pet.valid?).to be_falsey
       expect(pet.errors[:species]).to include("can't be blank")
@@ -35,6 +35,41 @@ RSpec.describe Pet, type: :model do
       pet = Pet.new
       expect(pet.valid?).to be_falsey
       expect(pet.errors[:name]).to include("can't be blank")
+    end
+  end
+
+  context :price do
+    it 'validates the presence of price' do
+      pet = Pet.new
+      expect(pet.valid?).to be_falsey
+      expect(pet.errors[:name]).to include("can't be blank")
+    end
+
+    it 'validates that price is a number' do
+      pet = Pet.new(price: 39.99)
+      expect(pet.price).to be_a_kind_of(Numeric)
+    end
+
+    context 'price_range' do
+      it 'ensures number is between 1 to 999.99' do
+        pet = Pet.new(price: 1)
+        expect(pet.price).to be_between(1, 999.99)
+      end
+
+      it 'ensures number is between 1 to 999.99' do
+        pet = Pet.new(price: 999.99)
+        expect(pet.price).to be_between(1, 999.99)
+      end
+
+      it 'returns error when price is below 1' do
+        pet = Pet.create(price: 0)
+        expect(pet.errors[:price]).to include("must be greater than 0")
+      end
+
+      it 'returns error when price is greater than 999.99' do
+        pet = Pet.create(price: 1000)
+        expect(pet.errors[:price]).to include("must be less than or equal to 999.99")
+      end
     end
   end
 end
