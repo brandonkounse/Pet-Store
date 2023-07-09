@@ -1,6 +1,6 @@
 class StoresController < ApplicationController
   def index
-    @pet = Pet.all
+    @pet = Pet.paginate(page: params[:page], per_page: 25)
   end
 
   def inventory
