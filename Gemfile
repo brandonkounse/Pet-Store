@@ -33,6 +33,9 @@ gem "redis", "~> 4.0"
 # Email Validator
 gem 'email_validator', '~> 1.6'
 
+# Pagination
+gem 'will_paginate', '~> 3.1', '>= 3.1.6'
+
 # Use Kredis to get higher-level data types in Redis [https://github.com/rails/kredis]
 # gem "kredis"
 
