@@ -91,3 +91,7 @@ th, td {
 .pet-details {
     padding: 10px;
 }
+
+.paginate {
+    text-align: center;
+}
