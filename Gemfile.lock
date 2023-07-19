@@ -187,6 +187,7 @@ GEM
       rspec-mocks (~> 3.12)
       rspec-support (~> 3.12)
     rspec-support (3.12.0)
+    ruby-limiter (2.2.2)
     rubyzip (2.3.2)
     selenium-webdriver (4.8.6)
       rexml (~> 3.2, >= 3.2.5)
@@ -242,6 +243,7 @@ DEPENDENCIES
   rails (~> 7.0.4, >= 7.0.4.3)
   redis (~> 4.0)
   rspec-rails (~> 6.0, >= 6.0.3)
+  ruby-limiter
   selenium-webdriver
   sprockets-rails
   stimulus-rails

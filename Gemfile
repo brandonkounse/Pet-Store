@@ -36,6 +36,9 @@ gem 'email_validator', '~> 1.6'
 # Pagination
 gem 'will_paginate', '~> 3.1', '>= 3.1.6'
 
+# Rate Limiting
+gem 'ruby-limiter'
+
 # Use Kredis to get higher-level data types in Redis [https://github.com/rails/kredis]
 # gem "kredis"
 
