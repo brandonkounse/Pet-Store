@@ -6,13 +6,26 @@ RSpec.describe StoresController do
       sleep(1)
     end
 
-    it 'allows get requests <= 4 per second' do
-      4.times { get :index }
-      expect(response).to have_http_status(200)
+    context ':index' do
+      it 'allows get requests <= 4 per second' do
+        4.times { get :index }
+        expect(response).to have_http_status(200)
+      end
+
+      it 'blocks get requests > 5 per second' do
+        expect { 6.times { get :index } }.to output('Limit reached!').to_stdout
+      end
     end
 
-    it 'blocks get requests > 5 per second' do
-      expect { 6.times { get :index } }.to output('Limit reached!').to_stdout
+    context ':inventory' do
+      it 'allows get requests <= 4 per second' do
+        4.times { get :inventory }
+        expect(response).to have_http_status(200)
+      end
+
+      it 'blocks get requests > 5 per second' do
+        expect { 6.times { get :inventory } }.to output('Limit reached!').to_stdout
+      end
     end
   end
 end
