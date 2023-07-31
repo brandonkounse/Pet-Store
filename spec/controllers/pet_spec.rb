@@ -1,7 +1,5 @@
 require 'rails_helper'
 
-# index new create show edit update search destroy
-
 RSpec.describe PetsController do
   describe 'limiter' do
     before(:each) do
@@ -27,6 +25,21 @@ RSpec.describe PetsController do
 
       it 'blocks get requests > 5 per second' do
         expect { 6.times { get :new } }.to output('Limit reached!').to_stdout
+      end
+    end
+
+    context ':show' do
+      let(:fake_pet) { double('fake_pet', id: 1) }
+
+      it 'allows get requests <= 4 per second' do
+        allow(Pet).to receive(:find).and_return(fake_pet.id)
+        4.times { get :show, params: { id: fake_pet.id } }
+        expect(response).to have_http_status(200)
+      end
+
+      it 'blocks get requests > 6 per second' do
+        allow(Pet).to receive(:find).and_return(fake_pet.id)
+        expect { 6.times { get :show, params: { id: fake_pet.id } } }.to output('Limit reached!').to_stdout
       end
     end
   end
