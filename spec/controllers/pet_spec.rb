@@ -1,7 +1,40 @@
 require 'rails_helper'
 
 RSpec.describe PetsController do
-  describe 'rate limiting' do
+  context 'Controller Actions' do
+    context 'when sending get request to :index' do
+      it 'returns status code 200' do
+        get :index
+        expect(response).to have_http_status(200)
+      end
+    end
+
+    context 'when sending get request to :new' do
+      it 'returns status code 200' do
+        get :new
+        expect(response).to have_http_status(200)
+      end
+    end
+
+    context 'when sending post request to :create' do
+      it 'it successfully redirects with code 302' do
+        post :create, params: { pet: { name: 'test', species: 'tester', age: 1, price: 4.99 } }
+        expect(response).to have_http_status(302)
+      end
+    end
+
+    context 'when sending get request to :show' do
+      let(:fake_pet) { instance_double('fake_pet', id: 17) }
+
+      it 'returns status code 200' do
+        allow(Pet).to receive(:find).and_return(fake_pet.id)
+        get :show, params: { id: fake_pet.id }
+        expect(response).to have_http_status(200)
+      end
+    end
+  end
+
+  context 'Rate Limiting' do
     before(:each) do
       sleep(1)
     end
