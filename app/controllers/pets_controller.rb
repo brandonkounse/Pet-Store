@@ -1,15 +1,9 @@
 class PetsController < ApplicationController
   extend Limiter::Mixin
+  extend LimitHelper
   include PetsHelper
 
-  limit_method(:index, rate: 5, interval: 1) { print 'Limit reached!' }
-  limit_method(:new, rate: 5, interval: 1) { print 'Limit reached!' }
-  limit_method(:create, rate: 5, interval: 1) { print 'Limit reached!' }
-  limit_method(:show, rate: 5, interval: 1) { print 'Limit reached!' }
-  limit_method(:edit, rate: 5, interval: 1) { print 'Limit reached!' }
-  limit_method(:update, rate: 5, interval: 1) { print 'Limit reached!' }
-  limit_method(:search, rate: 5, interval: 1) { print 'Limit reached!' }
-  limit_method(:destroy, rate: 5, interval: 1) { print 'Limit reached!' }
+  limit(:index, :new, :show, :edit, :search)
 
   def index
     @pet = Pet.all
