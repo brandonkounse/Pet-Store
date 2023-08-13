@@ -70,7 +70,7 @@ RSpec.describe PetsController do
       end
     end
 
-    context 'when sending GET request to search' do
+    context 'when sending GET request to :search' do
       context 'when no results are found' do
         let(:fake_search) { '999' }
 
@@ -105,7 +105,15 @@ RSpec.describe PetsController do
         end
       end
     end
-  # destroy
+
+    context 'when sending DELETE request to :destroy' do
+      let(:fake_pet) { Pet.create(name: 'goodbye_world', species: '?', age: 1, price: 1.99) }
+
+      it 'returns status code 302 on deletion' do
+        delete :destroy, params: { id: fake_pet.id }
+        expect(response).to have_http_status(302)
+      end
+    end
   end
 
   context 'Rate Limiting' do
