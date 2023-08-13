@@ -52,13 +52,20 @@ RSpec.describe PetsController do
       end
     end
 
-    context 'when sending put request to :show' do # calling the #update method
+    context 'when sending put request to :edit' do # calling the #update method
       let(:fake_pet) { Pet.create(id: 1000, name: 'bugs', species: 'bugsby', age: 9, price: 11.99) }
 
       context 'when submitting valid data' do
         it 'successfully redirects with code 302' do
           put :update, params: { id: fake_pet.id, pet: { name: 'test', species: 'tester', age: 1, price: 4.99 } }
           expect(response).to have_http_status(302)
+        end
+      end
+
+      context 'when submitting invalid data' do
+        it 'returns status code 422' do
+          put :update, params: { id: fake_pet.id, pet: { name: '' } }
+          expect(response).to have_http_status(422)
         end
       end
     end
