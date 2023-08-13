@@ -2,21 +2,21 @@ require 'rails_helper'
 
 RSpec.describe PetsController do
   context 'Controller Actions' do
-    context 'when sending get request to :index' do
+    context 'when sending GET request to :index' do
       it 'returns status code 200' do
         get :index
         expect(response).to have_http_status(200)
       end
     end
 
-    context 'when sending get request to :new' do
+    context 'when sending GET request to :new' do
       it 'returns status code 200' do
         get :new
         expect(response).to have_http_status(200)
       end
     end
 
-    context 'when sending post request to :create' do
+    context 'when sending POST request to :create' do
       context 'when submitting valid data' do
         it 'successfully redirects with code 302' do
           post :create, params: { pet: { name: 'test', species: 'tester', age: 1, price: 4.99 } }
@@ -32,7 +32,7 @@ RSpec.describe PetsController do
       end
     end
 
-    context 'when sending get request to :show' do
+    context 'when sending GET request to :show' do
       let(:fake_pet) { instance_double('fake_pet', id: 17) }
 
       it 'returns status code 200' do
@@ -42,7 +42,7 @@ RSpec.describe PetsController do
       end
     end
 
-    context 'when sending get request to :edit' do
+    context 'when sending GET request to :edit' do
       let(:fake_pet) { instance_double('fake_pet', id: 19) }
 
       it 'returns status code 200' do
@@ -52,7 +52,7 @@ RSpec.describe PetsController do
       end
     end
 
-    context 'when sending put request to :edit' do # calling the #update method
+    context 'when sending PUT request to :update' do
       let(:fake_pet) { Pet.create(id: 1000, name: 'bugs', species: 'bugsby', age: 9, price: 11.99) }
 
       context 'when submitting valid data' do
@@ -69,7 +69,42 @@ RSpec.describe PetsController do
         end
       end
     end
-  # search
+
+    context 'when sending GET request to search' do
+      context 'when no results are found' do
+        let(:fake_search) { '999' }
+
+        it 'returns no results with status code 200' do
+           get :search, params: { search: fake_search }
+           expect(response).to have_http_status(200)
+        end
+      end
+
+      context 'when one result is found' do
+        let(:fake_pet) { double('fake_pet', id: 1) }
+        let(:fake_search) { '1' }
+
+        it 'returns one result and redirects with status code 302' do
+          allow(Pet).to receive(:where).with("id = ?", fake_pet.id).and_return(fake_pet)
+          allow(fake_pet).to receive(:empty?).and_return false
+          allow(fake_pet).to receive(:count).and_return(1)
+          allow(fake_pet).to receive(:first).and_return(fake_pet.id)
+          get :search, params: { search: fake_search }
+          expect(response).to have_http_status(302)
+        end
+      end
+
+      context 'when many results are found' do
+        let(:fake_search) { 'Bin' }
+        let(:pet_one) { Pet.create(name: 'Binder', species: 'dog', age: 11, price: 12.99) }
+        let(:pet_two) { Pet.create(name: 'Binzel', species: 'dog', age: 11, price: 12.99) }
+
+        it 'returns multiple results with status code 200' do
+          get :search, params: { search: fake_search }
+          expect(response).to have_http_status(200)
+        end
+      end
+    end
   # destroy
   end
 
@@ -78,7 +113,7 @@ RSpec.describe PetsController do
       sleep(1)
     end
 
-    context 'when sending get request to :index' do
+    context 'when sending GET request to :index' do
       it 'allows requests <= 4 per second' do
         4.times { get :index }
         expect(response).to have_http_status(200)
@@ -89,7 +124,7 @@ RSpec.describe PetsController do
       end
     end
 
-    context 'when sending get request to :new' do
+    context 'when sending GET request to :new' do
       it 'allows requests <= 4 per second' do
         4.times { get :new }
         expect(response).to have_http_status(200)
@@ -100,7 +135,7 @@ RSpec.describe PetsController do
       end
     end
 
-    context 'when sending get request to :show' do
+    context 'when sending GET request to :show' do
       let(:fake_pet) { double('fake_pet', id: 1) }
 
       it 'allows requests <= 4 per second' do
@@ -115,7 +150,7 @@ RSpec.describe PetsController do
       end
     end
 
-    context 'when sending get request to :edit' do
+    context 'when sending GET request to :edit' do
       let(:fake_pet) { double('fake_pet', id: 1) }
 
       it 'allows requests <= 4 per second' do
@@ -130,7 +165,7 @@ RSpec.describe PetsController do
       end
     end
 
-    context 'when sending get request to :search' do
+    context 'when sending GET request to :search' do
       let(:fake_search) { 'sa' }
 
       it 'allows requests <= 4 per second' do
