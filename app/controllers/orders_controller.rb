@@ -1,5 +1,13 @@
 class OrdersController < ApplicationController
+  extend Limiter::Mixin
+  extend LimitHelper
   include OrdersHelper
+
+  limit_method(:new, rate: 5, interval: 1) { print 'Limit reached!' }
+  limit_method(:create, rate: 5, interval: 1) { print 'Limit reached!' }
+  limit_method(:show, rate: 5, interval: 1) { print 'Limit reached!' }
+  limit_method(:destroy, rate: 5, interval: 1) { print 'Limit reached!' }
+  limit_method(:sold, rate: 5, interval: 1) { print 'Limit reached!' }
 
   def new
     session[:pet] = params[:id]
