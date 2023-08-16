@@ -33,7 +33,7 @@ RSpec.describe PetsController do
     end
 
     context 'when sending GET request to :show' do
-      let(:fake_pet) { instance_double('fake_pet', id: 17) }
+      let(:fake_pet) { double('fake_pet', id: 17) }
 
       it 'returns status code 200' do
         allow(Rails.cache).to receive(:fetch).with("pet#{fake_pet.id}", expires_in: 30.minutes).and_return(fake_pet)
@@ -43,7 +43,7 @@ RSpec.describe PetsController do
     end
 
     context 'when sending GET request to :edit' do
-      let(:fake_pet) { instance_double('fake_pet', id: 19) }
+      let(:fake_pet) { double('fake_pet', id: 19) }
 
       it 'returns status code 200' do
         allow(Pet).to receive(:find).with(fake_pet.id.to_s).and_return(fake_pet)
