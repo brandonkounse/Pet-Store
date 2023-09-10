@@ -80,7 +80,10 @@ class PetsController < ApplicationController
   def destroy
     @pet = Pet.find(params[:id])
     @pet.destroy
-    redirect_to pets_path, notice: "#{@pet.name} deleted successfully."
+    respond_to do |format|
+      format.html { redirect_to pets_path, notice: "#{@pet.name} deleted successfully." }
+      format.json { render json: "#{@pet.name} deleted successfully." }
+    end
   end
 
   private
