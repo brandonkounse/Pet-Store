@@ -33,8 +33,10 @@ class PetsController < ApplicationController
 
   def show
     @pet = cached_pet_data
-
-    render :show
+    respond_to do |format|
+      format.html { render :show }
+      format.json { render json: @pet }
+    end
   end
 
   def edit
