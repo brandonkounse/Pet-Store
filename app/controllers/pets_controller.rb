@@ -20,10 +20,14 @@ class PetsController < ApplicationController
 
   def create
     @pet = Pet.new(pet_params)
-    if @pet.save
-      redirect_to @pet
-    else
-      render :new, status: :unprocessable_entity
+    respond_to do |format|
+      if @pet.save
+        format.html { redirect_to @pet }
+        format.json { render json: { name: @pet.name, species: @pet.species, age: @pet.age, price: @pet.price } }
+      else
+        format.html { render :new, status: :unprocessable_entity }
+        format.json { render json: { errors: @pet.errors.full_messages } }
+      end
     end
   end
 
