@@ -1,8 +1,24 @@
 require 'rails_helper'
 
 RSpec.describe OrdersController do
-  describe 'limiter' do
+  context 'Controller Actions' do
+    let(:fake_pet) { double('fake_pet', id: 1) }
+    # new
+    context 'when sending GET request to #new' do
+      it 'returns status code 200' do
+        allow(Pet).to receive(:find).and_return(fake_pet)
+        allow(fake_pet).to receive(:sold).and_return(false)
+        get :new
+        expect(response).to have_http_status(200)
+      end
+    end
+    # create
+    # show
+    # destroy
+    # sold
+  end
 
+  context 'Rate Limiting' do
     before(:each) do
       sleep(1)
     end
