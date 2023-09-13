@@ -26,8 +26,8 @@ RSpec.describe PetsController do
 
       context 'when submitting invalid data' do
         it 'returns status code 422' do
-           post :create, params: { pet: { name: 'test' } }
-           expect(response).to have_http_status(422)
+          post :create, params: { pet: { name: 'test' } }
+          expect(response).to have_http_status(422)
         end
       end
     end
@@ -75,8 +75,8 @@ RSpec.describe PetsController do
         let(:fake_search) { '999' }
 
         it 'returns no results with status code 200' do
-           get :search, params: { search: fake_search }
-           expect(response).to have_http_status(200)
+          get :search, params: { search: fake_search }
+          expect(response).to have_http_status(200)
         end
       end
 
@@ -177,9 +177,9 @@ RSpec.describe PetsController do
       let(:fake_search) { 'sa' }
 
       it 'allows requests <= 4 per second' do
-         allow(Pet).to receive(:where).and_return(search: fake_search)
-         4.times { get :search, params: { search: fake_search } }
-         expect(response).to have_http_status(302)
+        allow(Pet).to receive(:where).and_return(search: fake_search)
+        4.times { get :search, params: { search: fake_search } }
+        expect(response).to have_http_status(302)
       end
 
       it 'blocks requests > 6 per second' do
