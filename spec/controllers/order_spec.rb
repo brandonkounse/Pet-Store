@@ -1,18 +1,39 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe OrdersController do
   context 'Controller Actions' do
-    let(:fake_pet) { double('fake_pet', id: 1) }
-    # new
+    subject(:fake_order) { double('fake_order') }
+    let(:fake_pet) { double('fake_pet', id: 1, sold: false) }
+
     context 'when sending GET request to #new' do
       it 'returns status code 200' do
         allow(Pet).to receive(:find).and_return(fake_pet)
-        allow(fake_pet).to receive(:sold).and_return(false)
+        allow(fake_pet).to receive(:sold).and_return false
         get :new
         expect(response).to have_http_status(200)
       end
     end
+
     # create
+    context 'when sending POST request to #create' do
+      context 'when submitting valid data' do
+        it 'redirects with status code 302' do
+          allow(Pet).to receive(:find).and_return(fake_pet)
+          allow(fake_pet).to receive(:sold).and_return false
+          allow(JSON).to receive(:parse).and_return(fake_pet.id.to_s)
+          post :create, params: {
+            order: {
+              user_email: 'test@email.com'
+              # total_cost: '12.99',
+              # order_details: fake_pet.to_json
+            }
+          }
+          expect(response).to have_http_status(302)
+        end
+      end
+    end
     # show
     # destroy
     # sold
@@ -47,7 +68,8 @@ RSpec.describe OrdersController do
 
       before do
         allow(Pet).to receive(:find).and_return(fake_pet)
-        allow(Rails.cache).to receive(:fetch).with("order#{fake_order.id}", expires_in: 30.minutes).and_return(fake_order)
+        allow(Rails.cache).to receive(:fetch).with("order#{fake_order.id}",
+                                                   expires_in: 30.minutes).and_return(fake_order)
       end
 
       it 'allows GET requests <= 4 per second' do

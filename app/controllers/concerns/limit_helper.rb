@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 extend Limiter::Mixin
 
 module LimitHelper

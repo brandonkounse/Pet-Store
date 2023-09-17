@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 Rails.application.routes.draw do
   root 'stores#index'
 
@@ -7,5 +9,5 @@ Rails.application.routes.draw do
 
   resources :pets
   resources :stores, path: 'store', only: [:index]
-  resources :orders, path: 'store/order', only: [:new, :create, :show, :destroy]
+  resources :orders, path: 'store/order', only: %i[new create show destroy]
 end

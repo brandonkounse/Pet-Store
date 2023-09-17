@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe PetsController do
@@ -85,7 +87,7 @@ RSpec.describe PetsController do
         let(:fake_search) { '1' }
 
         it 'returns one result and redirects with status code 302' do
-          allow(Pet).to receive(:where).with("id = ?", fake_pet.id).and_return(fake_pet)
+          allow(Pet).to receive(:where).with('id = ?', fake_pet.id).and_return(fake_pet)
           allow(fake_pet).to receive(:empty?).and_return false
           allow(fake_pet).to receive(:count).and_return(1)
           allow(fake_pet).to receive(:first).and_return(fake_pet.id)

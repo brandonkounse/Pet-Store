@@ -1,7 +1,8 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe Pet, type: :model do
-
   context :age do
     it 'validates the presence of age' do
       pet = Pet.new
@@ -12,13 +13,13 @@ RSpec.describe Pet, type: :model do
     it 'validates that age is an integer' do
       pet = Pet.new
       expect(pet.valid?).to be_falsey
-      expect(pet.errors[:age]).to include("is not a number")
+      expect(pet.errors[:age]).to include('is not a number')
     end
 
     it 'validates age is greater than 0' do
       pet = Pet.new(age: -2)
       expect(pet.valid?).to be_falsey
-      expect(pet.errors[:age]).to include("must be greater than 0")
+      expect(pet.errors[:age]).to include('must be greater than 0')
     end
   end
 
@@ -63,12 +64,12 @@ RSpec.describe Pet, type: :model do
 
       it 'returns error when price is below 1' do
         pet = Pet.create(price: 0)
-        expect(pet.errors[:price]).to include("must be greater than 0")
+        expect(pet.errors[:price]).to include('must be greater than 0')
       end
 
       it 'returns error when price is greater than 999.99' do
         pet = Pet.create(price: 1000)
-        expect(pet.errors[:price]).to include("must be less than or equal to 999.99")
+        expect(pet.errors[:price]).to include('must be less than or equal to 999.99')
       end
     end
   end

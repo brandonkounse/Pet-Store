@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module PetsHelper
   def pet_image_path(pet)
     pet_img = "#{pet.species.downcase}.jpg"

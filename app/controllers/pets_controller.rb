@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class PetsController < ApplicationController
   extend Limiter::Mixin
   extend LimitHelper
