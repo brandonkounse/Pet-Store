@@ -35,11 +35,7 @@
   <%= form.label :user_email, 'Email ' %>
   <%= form.text_field :user_email, placeholder: 'user@example.com' %>
 
-  <% form.label :order_details %>
-  <%= form.hidden_field :order_details, value: @pet.to_json %>
-
-  <% form.label :total_cost %>
-  <%= form.hidden_field :total_cost, value: @pet.price.to_d %>
+  <%= form.hidden_field :pet_id, value: @pet.id %>
 
   <%= form.submit 'Order' %>
 <% end %>
