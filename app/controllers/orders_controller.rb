@@ -3,51 +3,57 @@
 class OrdersController < ApplicationController
   extend Limiter::Mixin
   extend LimitHelper
+
+  include PetsHelper
   include OrdersHelper
 
+  before_action :set_order, only: %i[show destroy]
   limit(:new, :show, :sold)
 
   def new
-    session[:pet] = params[:id]
-    @pet = Pet.find(session[:pet])
     @order = Order.new
+    @pet = cached_pet_data
+    session[:pet] = @pet.id
     pet_sold?
   end
 
+  def sold
+    @pet = Pet.find(session[:pet_id])
+  end
+
   def create
-    @pet = Pet.find(session[:pet])
     @order = Order.new(order_params)
+    @order.pet = Pet.find(params[:order][:pet_id])
     if @order.save
       redirect_to @order
     else
-      render :new, params: [session[:pet]], status: :unprocessable_entity
+      @pet = Pet.find(params[:pet_id])
+      render :new, status: :unprocessable_entity
     end
   end
 
   def show
-    @pet = Pet.find(session[:pet])
-    @order = cached_order_data
+    @pet = @order.pet
   end
 
   def destroy
-    @pet = Pet.find(session[:pet])
-    @order = Order.find(params[:id])
+    @pet = @order.pet
     @order.destroy
     redirect_to stores_path, notice: "Order for #{@pet.name} cancelled successfully!"
-  end
-
-  def sold
-    @pet = Pet.find(session[:pet])
   end
 
   private
 
   def order_params
-    params.require(:order).permit(:user_email, :total_cost, :order_details)
+    params.require(:order).permit(:user_email, :pet_id)
+  end
+
+  def set_order
+    @order = cached_order_data
   end
 
   def pet_sold?
-    if @pet.sold == true
+    if @pet.sold
       redirect_to :sold
     else
       render :new
