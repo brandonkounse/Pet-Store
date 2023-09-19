@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class Pet < ApplicationRecord
+  has_one :order
+
   validates :age, numericality: { only_integer: true, greater_than: 0 }, presence: true
   validates :species, presence: true
   validates :name, presence: true
