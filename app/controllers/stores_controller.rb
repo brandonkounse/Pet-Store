@@ -7,7 +7,7 @@ class StoresController < ApplicationController
   limit(:index, :inventory)
 
   def index
-    @pet = Pet.paginate(page: params[:page], per_page: 25)
+    @pet = Pet.order(:id).paginate(page: params[:page], per_page: 25)
   end
 
   def inventory
