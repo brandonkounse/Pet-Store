@@ -2,10 +2,10 @@
 
 <ul>
     <li>Order Confirmation Number: <%= @order.order_confirmation_number %></li>
-    <li>Pet: <%= JSON.parse(@order.order_details)["name"] %></li>
-    <li>Total: $<%= @order.total_cost %></li>
     <li>Order Date: <%= @order.order_date %></li>
     <li>User Info: <%= @order.user_email %></li>
+    <li>Pet: <%= @order.pet.name %></li>
+    <li>Total: $<%= @order.pet.price %></li>
 </ul>
 
 <%= button_to "Cancel Order", order_path(@order.id), method: :delete, data: { turbo_confirm: "Cancel order for #{@pet.name}?" } %>
