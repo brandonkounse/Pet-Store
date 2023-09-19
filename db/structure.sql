@@ -33,11 +33,10 @@ CREATE TABLE public.orders (
     id bigint NOT NULL,
     order_confirmation_number character varying,
     order_date date,
-    total_cost numeric,
-    order_details text,
     user_email character varying,
     created_at timestamp(6) without time zone NOT NULL,
-    updated_at timestamp(6) without time zone NOT NULL
+    updated_at timestamp(6) without time zone NOT NULL,
+    pet_id bigint NOT NULL
 );
 
 
@@ -151,6 +150,21 @@ ALTER TABLE ONLY public.schema_migrations
 
 
 --
+-- Name: index_orders_on_pet_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_orders_on_pet_id ON public.orders USING btree (pet_id);
+
+
+--
+-- Name: orders fk_rails_83c408cd8b; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.orders
+    ADD CONSTRAINT fk_rails_83c408cd8b FOREIGN KEY (pet_id) REFERENCES public.pets(id);
+
+
+--
 -- PostgreSQL database dump complete
 --
 
@@ -169,6 +183,8 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20230611232335'),
 ('20230611232950'),
 ('20230616214130'),
-('20230621161408');
+('20230621161408'),
+('20230918000819'),
+('20230918000958');
 
 
