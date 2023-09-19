@@ -1,12 +1,19 @@
 # frozen_string_literal: true
 
 class Order < ApplicationRecord
+  belongs_to :pet
+
   validates :user_email, email: true, presence: true
 
   before_create :generate_order_number, :set_order_date
   after_commit :toggle_sold
+  after_commit :clear_cache, on: %i[update destroy]
 
   private
+
+  def clear_cache
+    Rails.cache.delete("order#{id}")
+  end
 
   def generate_order_number
     loop do
@@ -20,8 +27,6 @@ class Order < ApplicationRecord
   end
 
   def toggle_sold
-    pet_id = JSON.parse(order_details)['id']
-    pet = Pet.find_by(id: pet_id)
-    pet.sold == true ? pet.update(sold: false) : pet.update(sold: true)
+    pet.update(sold: !pet.sold)
   end
 end
