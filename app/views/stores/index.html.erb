@@ -5,7 +5,7 @@
 <% end %>
 
 <div class="grid-container">
-  <% @pet.sort.each do |pet| %>
+  <% @pet.each do |pet| %>
     <% next if pet.sold == true %>
     <%= link_to new_order_path(id: pet.id) do %>
       <div class="box">
