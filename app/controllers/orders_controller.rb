@@ -17,10 +17,6 @@ class OrdersController < ApplicationController
     pet_sold?
   end
 
-  def sold
-    @pet = Pet.find(session[:pet_id])
-  end
-
   def create
     @order = Order.new(order_params)
     @order.pet = Pet.find(params[:order][:pet_id])
@@ -40,6 +36,10 @@ class OrdersController < ApplicationController
     @pet = @order.pet
     @order.destroy
     redirect_to stores_path, notice: "Order for #{@pet.name} cancelled successfully!"
+  end
+
+  def sold
+    @pet = Pet.find(session[:pet_id])
   end
 
   private
