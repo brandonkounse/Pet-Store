@@ -36,7 +36,10 @@ class OrdersController < ApplicationController
   end
 
   def show
-    @pet = @order.pet
+    respond_to do |format|
+      format.html
+      format.json { render json: @order }
+    end
   end
 
   def destroy
