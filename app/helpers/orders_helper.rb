@@ -5,5 +5,7 @@ module OrdersHelper
     Rails.cache.fetch("order#{params[:id]}", expires_in: 30.minutes) do
       Order.find(params[:id])
     end
+  rescue ActiveRecord::RecordNotFound
+    nil
   end
 end
