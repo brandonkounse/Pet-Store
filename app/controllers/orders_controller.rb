@@ -19,12 +19,19 @@ class OrdersController < ApplicationController
 
   def create
     @order = Order.new(order_params)
-    @order.pet = Pet.find(params[:order][:pet_id])
-    if @order.save
-      redirect_to @order
-    else
-      @pet = Pet.find(params[:pet_id])
-      render :new, status: :unprocessable_entity
+    @order.pet = Pet.find_by_id(params[:order][:pet_id]) if params[:order][:pet_id]
+
+    respond_to do |format|
+      if @order.save
+        format.html { redirect_to @order }
+        format.json { render json: @order }
+      else
+        format.html do
+          @pet = Pet.find(params[:pet_id])
+          render :new, status: :unprocessable_entity
+        end
+        format.json { render json: { errors: @order.errors.full_messages } }
+      end
     end
   end
 
