@@ -5,7 +5,7 @@
     <th>Species</th>
     <th>Age</th>
     <th>Price</th>
-        <% @pet.sort.each do |pet| %>
+        <% @pet.each do |pet| %>
             <tr>
                 <td><%= pet.id %></td>
                 <td><%= pet.name %></td>

@@ -8,7 +8,7 @@ class PetsController < ApplicationController
   limit(:index, :new, :show, :edit, :search)
 
   def index
-    @pet = Pet.all
+    @pet = Pet.order(:id)
 
     respond_to do |format|
       format.html
