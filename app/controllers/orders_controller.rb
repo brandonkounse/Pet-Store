@@ -37,15 +37,26 @@ class OrdersController < ApplicationController
 
   def show
     respond_to do |format|
-      format.html
-      format.json { render json: @order }
+      if @order
+        format.html
+        format.json { render json: @order }
+      else
+        format.html { redirect_to stores_path, notice: 'Order not found' }
+        format.json { render json: 'Record Not Found', status: :not_found }
+      end
     end
   end
 
   def destroy
-    @pet = @order.pet
-    @order.destroy
-    redirect_to stores_path, notice: "Order for #{@pet.name} cancelled successfully!"
+    respond_to do |format|
+      if @order
+        @order.destroy
+        format.html { redirect_to stores_path, notice: "Order for #{@order.pet.name} cancelled successfully!" }
+        format.json { render json: "Order for #{@order.pet.name} successfully cancelled." }
+      else
+        format.json { render json: 'Record Not Found', status: :not_found }
+      end
+    end
   end
 
   def sold
