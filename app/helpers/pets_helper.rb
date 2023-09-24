@@ -11,5 +11,7 @@ module PetsHelper
     Rails.cache.fetch("pet#{params[:id]}", expires_in: 30.minutes) do
       Pet.find(params[:id])
     end
+  rescue ActiveRecord::RecordNotFound
+    nil
   end
 end
