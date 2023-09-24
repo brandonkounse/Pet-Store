@@ -5,6 +5,7 @@ class PetsController < ApplicationController
   extend LimitHelper
   include PetsHelper
 
+  before_action :set_pet, only: %i[show edit update destroy]
   limit(:index, :new, :show, :edit, :search)
 
   def index
@@ -34,19 +35,20 @@ class PetsController < ApplicationController
   end
 
   def show
-    @pet = cached_pet_data
     respond_to do |format|
-      format.html { render :show }
-      format.json { render json: @pet }
+      if @pet
+        format.html { render :show }
+        format.json { render json: @pet }
+      else
+        format.html { redirect_to pets_path, notice: 'Pet not found' }
+        format.json { render json: 'Record Not Found', status: :not_found }
+      end
     end
   end
 
-  def edit
-    @pet = Pet.find(params[:id])
-  end
+  def edit; end
 
   def update
-    @pet = Pet.find(params[:id])
     respond_to do |format|
       if @pet.update(pet_params)
         format.html { redirect_to @pet }
@@ -80,11 +82,14 @@ class PetsController < ApplicationController
   end
 
   def destroy
-    @pet = Pet.find(params[:id])
-    @pet.destroy
     respond_to do |format|
-      format.html { redirect_to pets_path, notice: "#{@pet.name} deleted successfully." }
-      format.json { render json: "#{@pet.name} deleted successfully." }
+      if @pet
+        @pet.destroy
+        format.html { redirect_to pets_path, notice: "#{@pet.name} deleted successfully." }
+        format.json { render json: "#{@pet.name} deleted successfully." }
+      else
+        format.json { render json: 'Record Not Found', status: :not_found }
+      end
     end
   end
 
@@ -92,5 +97,9 @@ class PetsController < ApplicationController
 
   def pet_params
     params.require(:pet).permit(:name, :species, :age, :price)
+  end
+
+  def set_pet
+    @pet = cached_pet_data
   end
 end
