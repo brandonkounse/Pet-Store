@@ -31,14 +31,14 @@ RSpec.describe OrdersController do
     context 'when sending POST request to :create' do
       context 'when valid data is submitted' do
         it 'redirects with status code 302' do
-          post :create, params: { order: { user_email: 'test@email.com', pet_id: 1 } }
+          post :create, params: { order: { user_email: 'test@email.com', pet_id: fake_pet.id } }
           expect(response).to have_http_status(302)
         end
       end
 
       context 'when invalid data is submitted' do
         it 'returns status unprocessable entity' do
-          post :create, params: { order: { user_email: 'test.com', pet_id: 1 } }
+          post :create, params: { order: { user_email: 'test.com', pet_id: fake_pet.id } }
           expect(response).to have_http_status(422)
         end
       end
