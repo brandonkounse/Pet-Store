@@ -5,6 +5,7 @@ class PetsController < ApplicationController
   extend LimitHelper
   include PetsHelper
 
+  before_action :authenticate_user!
   before_action :set_pet, only: %i[show edit update destroy]
   limit(:index, :new, :show, :edit, :search)
 
