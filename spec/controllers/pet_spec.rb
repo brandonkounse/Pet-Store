@@ -3,6 +3,12 @@
 require 'rails_helper'
 
 RSpec.describe PetsController do
+  let(:user) { User.create(email: 'user@example.com', password: 'password123') }
+
+  before do
+    sign_in user
+  end
+
   context 'Controller Actions' do
     context 'when sending GET request to :index' do
       it 'returns status code 200' do
@@ -48,7 +54,7 @@ RSpec.describe PetsController do
       let(:fake_pet) { double('fake_pet', id: 19) }
 
       it 'returns status code 200' do
-        allow(Pet).to receive(:find).with(fake_pet.id.to_s).and_return(fake_pet)
+        allow(Rails.cache).to receive(:fetch).with("pet#{fake_pet.id}", expires_in: 30.minutes).and_return(fake_pet)
         get :edit, params: { id: fake_pet.id }
         expect(response).to have_http_status(200)
       end
