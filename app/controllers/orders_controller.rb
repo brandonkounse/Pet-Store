@@ -12,8 +12,8 @@ class OrdersController < ApplicationController
 
   def new
     @order = Order.new
-    @pet = cached_pet_data
-    session[:pet] = @pet.id
+    @order.pet = cached_pet_data
+    session[:pet] = @order.pet.id
     pet_sold?
   end
 
@@ -27,7 +27,6 @@ class OrdersController < ApplicationController
         format.json { render json: @order }
       else
         format.html do
-          @pet = Pet.find(params[:pet_id])
           render :new, status: :unprocessable_entity
         end
         format.json { render json: { errors: @order.errors.full_messages } }
@@ -74,7 +73,7 @@ class OrdersController < ApplicationController
   end
 
   def pet_sold?
-    if @pet.sold
+    if @order.pet.sold
       redirect_to :sold
     else
       render :new
