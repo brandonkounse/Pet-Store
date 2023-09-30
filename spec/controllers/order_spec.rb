@@ -61,6 +61,14 @@ RSpec.describe OrdersController do
         expect(response).to have_http_status(302)
       end
     end
+
+    context 'when sending GET request to :sold' do
+      it 'returns status code 200' do
+        fake_pet.sold = true
+        get :sold
+        expect(response).to have_http_status(200)
+      end
+    end
   end
 
   context 'Rate Limiting' do
