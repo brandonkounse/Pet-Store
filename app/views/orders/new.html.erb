@@ -20,14 +20,14 @@
     <th>Age</th>
     <th>Price</th>
       <tr>
-        <td><%= @pet.name %></td>
-        <td><%= @pet.species %></td>
-        <td><%= @pet.age %></td>
-        <td>$<%= @pet.price %></td>
+        <td><%= @order.pet.name %></td>
+        <td><%= @order.pet.species %></td>
+        <td><%= @order.pet.age %></td>
+        <td>$<%= @order.pet.price %></td>
       </tr>
   </table><br />
   <div class="box">
-    <div class="pet-image-container"><%= image_tag(pet_image_path(@pet), alt: 'Pet Image', class: 'pet-image') %></div>
+    <div class="pet-image-container"><%= image_tag(pet_image_path(@order.pet), alt: 'Pet Image', class: 'pet-image') %></div>
   </div>
 </div>
 
@@ -35,7 +35,7 @@
   <%= form.label :user_email, 'Email ' %>
   <%= form.text_field :user_email, placeholder: 'user@example.com' %>
 
-  <%= form.hidden_field :pet_id, value: @pet.id %>
+  <%= form.hidden_field :pet_id, value: @order.pet.id %>
 
   <%= form.submit 'Order' %>
 <% end %>
