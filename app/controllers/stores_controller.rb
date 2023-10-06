@@ -4,7 +4,7 @@ class StoresController < ApplicationController
   extend Limiter::Mixin
   extend LimitHelper
 
-  MAX_PETS_PER_PAGE = 25
+  MAX_PETS_PER_PAGE = 24
 
   limit(:index, :inventory)
 
