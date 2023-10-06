@@ -59,7 +59,7 @@ class OrdersController < ApplicationController
   end
 
   def sold
-    @pet = Pet.find(session[:pet_id])
+    @pet = Pet.find(session[:pet])
   end
 
   private
