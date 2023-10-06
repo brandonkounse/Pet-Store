@@ -9,7 +9,7 @@ class StoresController < ApplicationController
   limit(:index, :inventory)
 
   def index
-    @pet = Pet.order(:id).paginate(page: params[:page], per_page: MAX_PETS_PER_PAGE)
+    @pet = Pet.where(sold: false).order(:id).paginate(page: params[:page], per_page: MAX_PETS_PER_PAGE)
 
     respond_to do |format|
       format.html
