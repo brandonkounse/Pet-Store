@@ -51,7 +51,7 @@ By default, the index page of the web app is the storefont. A pet can be clicked
 
 If submitting the order through `-cURL JSON`, the `POST`, `PUT`, and `DELETE` requests must have the Rails generated authenticity token in the header of the request. This measure is to protect against Cross Site Request Forgery. Here is an example request:
 
-```JSON
+```bash
 curl --location 'http://localhost:3000/store/order' \
 --header 'Accept: application/json' \
 --header 'Content-Type: application/json' \
@@ -82,7 +82,7 @@ Like with the storefront, if using `-cURL JSON` and a `POST`, `PUT`, or `DELETE`
 
 To sign-up, a `POST` request is sent to /users with an example such as:
 
-```JSON
+```bash
 curl --location 'http://localhost:3000/users/' \
 --header 'Accept: application/json' \
 --header 'Content-Type: application/json' \
