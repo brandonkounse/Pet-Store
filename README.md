@@ -24,7 +24,7 @@ The tech stack is as follows:
 **Docker** and docker-compose are used to containerize the application and coordinate the image services to run together. To start the application, while in the app's root directory, run:
 
 ```bash
-docker build -t <petstore>
+docker build -t <petstore> .
 ```
 
 From there, the `docker-compose.yml` file is ran to spin up PostgreSQL and Redis.
